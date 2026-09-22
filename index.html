@@ -244,28 +244,27 @@ p{color:var(--muted)}
 .check input:checked{background:var(--gold);border-color:var(--gold)}
 .check input:checked::after{content:'';position:absolute;left:6px;top:2.5px;width:4px;height:9px;border:solid var(--wine-deep);border-width:0 2px 2px 0;transform:rotate(45deg)}
 
+/* AUTH — COM ABAS */
 .auth-wrap{min-height:100svh;display:grid;place-items:center;padding:calc(var(--nav-h) + 40px) 20px 60px;position:relative;overflow:hidden}
-.auth-card{width:min(460px,100%);padding:42px 38px;background:rgba(33,18,26,.85);backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow),var(--shadow-wine);position:relative;z-index:2}
+.auth-card{width:min(480px,100%);padding:42px 38px;background:rgba(33,18,26,.85);backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow),var(--shadow-wine);position:relative;z-index:2}
 @media(max-width:480px){.auth-card{padding:30px 22px}}
 .auth-card h2{font-size:2rem;margin-bottom:10px}
-.auth-card > p{font-size:.9rem;margin-bottom:28px}
+.auth-card > p{font-size:.9rem;margin-bottom:26px}
 .auth-switch{text-align:center;font-size:.85rem;color:var(--muted-2);margin-top:22px}
 .auth-switch a{color:var(--gold);border-bottom:1px solid transparent;transition:.3s}
 .auth-switch a:hover{border-bottom-color:var(--gold)}
-.demo-hint{margin-top:20px;padding:14px 16px;border-radius:var(--r-sm);background:rgba(212,175,55,.09);border:1px dashed var(--line);font-size:.76rem;color:var(--muted);line-height:1.75}
-.demo-hint b{color:var(--gold);font-weight:600}
 
-/* PÁGINA DE ACESSO RESTRITO (SECRETA) */
-.staff-wrap{min-height:100svh;display:grid;place-items:center;padding:40px 20px;background:#0A0507;position:relative;overflow:hidden}
-.staff-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(123,45,66,.25),transparent 55%);pointer-events:none}
-.staff-card{width:min(400px,100%);padding:38px 34px;background:rgba(20,9,12,.95);backdrop-filter:blur(24px);border:1px solid rgba(212,175,55,.15);border-radius:20px;position:relative;z-index:2;text-align:center}
-.staff-card .staff-icon{width:52px;height:52px;border-radius:50%;background:rgba(123,45,66,.3);border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 22px;color:var(--gold)}
-.staff-card h2{font-family:var(--ff-display);font-size:1.6rem;color:var(--cream);margin-bottom:6px;font-weight:400}
-.staff-card > p{font-size:.82rem;color:var(--muted-2);margin-bottom:26px;letter-spacing:.06em}
-.staff-card .field{text-align:left}
-.staff-error{margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(217,122,108,.1);border:1px solid rgba(217,122,108,.3);color:var(--err);font-size:.78rem;display:none}
-.staff-error.show{display:block}
-.staff-foot{margin-top:22px;font-size:.68rem;color:var(--muted-2);letter-spacing:.18em;text-transform:uppercase}
+/* Abas de login */
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:5px;background:rgba(20,9,12,.6);border:1px solid var(--line-soft);border-radius:99px;margin-bottom:30px;position:relative}
+.auth-tab{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 12px;border-radius:99px;font-size:.8rem;font-weight:500;color:var(--muted);cursor:pointer;transition:.35s var(--ease);position:relative;z-index:1;letter-spacing:.02em}
+.auth-tab:hover{color:var(--cream)}
+.auth-tab.active-tab{background:linear-gradient(120deg,var(--wine-d),var(--wine),var(--wine-l));color:var(--cream);box-shadow:0 8px 22px -10px rgba(123,45,66,.8);border:1px solid rgba(212,175,55,.35)}
+.auth-tab svg{width:15px;height:15px;flex-shrink:0}
+.auth-tab[data-login-tab="therapist"].active-tab{background:linear-gradient(120deg,var(--gold-d),var(--gold));color:var(--wine-deep);border-color:var(--gold-l)}
+
+.auth-error{margin-top:14px;padding:11px 14px;border-radius:var(--r-sm);background:rgba(217,122,108,.12);border:1px solid rgba(217,122,108,.35);color:var(--err);font-size:.78rem;line-height:1.5;display:none}
+.auth-error.show{display:block;animation:fadeUp .4s var(--ease)}
+.auth-context-note{font-size:.76rem;color:var(--muted-2);text-align:center;margin-top:18px;line-height:1.6;padding-top:18px;border-top:1px solid var(--line-soft)}
 
 .dash{display:grid;grid-template-columns:250px 1fr;gap:28px;padding:calc(var(--nav-h) + 30px) 0 80px;align-items:start}
 @media(max-width:960px){.dash{grid-template-columns:1fr;gap:18px}}
@@ -460,10 +459,10 @@ footer{border-top:1px solid var(--line-soft);background:linear-gradient(180deg,v
         <a href="#/faq">FAQ</a>
       </div>
       <div class="foot-col">
-        <h5>Paciente</h5>
+        <h5>Acesso</h5>
+        <a href="#/login">Entrar (Paciente/Terapeuta)</a>
+        <a href="#/cadastro">Criar conta de paciente</a>
         <a href="#/agendar">Agendar consulta</a>
-        <a href="#/login">Entrar na minha conta</a>
-        <a href="#/cadastro">Criar conta</a>
       </div>
       <div class="foot-col">
         <h5>Contato</h5>
@@ -509,7 +508,7 @@ var DB = {
   get: function(k, fallback){ try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch(e){ return fallback; } },
   set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){ console.warn('Storage error', e); } }
 };
-var K = { USERS:'am_users_v4', APPTS:'am_appts_v4', PRE:'am_pre_v4', POSTS:'am_posts_v4', SESSION:'am_session_v4', SEEDED:'am_seeded_v4' };
+var K = { USERS:'am_users_v5', APPTS:'am_appts_v5', PRE:'am_pre_v5', POSTS:'am_posts_v5', SESSION:'am_session_v5', SEEDED:'am_seeded_v5' };
 
 var ICON = {
   calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
@@ -536,7 +535,7 @@ var ICON = {
   trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>',
   chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 21h18M7 21V10M12 21V4M17 21v-8"/></svg>',
   key: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L19 4M18 5l2 2M15 8l2 2"/></svg>',
-  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="width:24px;height:24px"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>',
   copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:14px;height:14px"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>'
 };
 
@@ -558,11 +557,11 @@ var SEED_TESTIMONIALS = [
 ];
 function seed(){
   if (DB.get(K.SEEDED)) return;
-  /* ============ LOGIN DA TERAPEUTA ============
+  /* ============ CREDENCIAIS DA TERAPEUTA ============
      Email: alle@allemourad.com
      Senha: alle2024
-     Acesso via rota secreta: #/acesso
-     ============================================ */
+     Acesso via aba "Terapeuta" em #/login
+     ================================================== */
   DB.set(K.USERS, [{ id:'u_therapist', name:'Alle Mourad', email:'alle@allemourad.com', pass:'alle2024', phone:'(11) 99999-0000', role:'therapist', createdAt:Date.now() }]);
   DB.set(K.POSTS, SEED_POSTS);
   DB.set(K.APPTS, []);
@@ -666,8 +665,7 @@ var routes = {
   'cadastro': function(){ return viewRegister(); },
   'agendar': function(){ return viewBooking(); },
   'paciente': function(sub){ return viewPatientDash(sub); },
-  'terapeuta': function(sub){ return viewTherapistDash(sub); },
-  'acesso': function(){ return viewStaffLogin(); }
+  'terapeuta': function(sub){ return viewTherapistDash(sub); }
 };
 function router(){
   var parts = routeParts();
@@ -946,81 +944,103 @@ function viewFAQ(){
   '</div></section>';
 }
 
-/* LOGIN PÚBLICO — apenas paciente */
+/* ============================================================
+   LOGIN COM ABAS: PACIENTE / TERAPEUTA
+   ============================================================ */
+var loginRole = 'patient';
+
 function viewLogin(){
+  loginRole = 'patient';
   window.__afterRender = function(){
+    // Tab switching
+    $$('[data-login-tab]').forEach(function(tab){
+      tab.onclick = function(){
+        loginRole = tab.dataset.loginTab;
+        $$('[data-login-tab]').forEach(function(t){ t.classList.remove('active-tab'); });
+        tab.classList.add('active-tab');
+        var heading = $('#loginHeading');
+        var sub = $('#loginSub');
+        var badge = $('#loginBadge');
+        var errEl = $('#loginError');
+        if (errEl) { errEl.classList.remove('show'); errEl.textContent = ''; }
+        if (loginRole === 'therapist') {
+          heading.textContent = 'Acesso da Terapeuta';
+          sub.textContent = 'Entre com suas credenciais profissionais para gerenciar pacientes, agenda e conteúdos.';
+          badge.textContent = 'Terapeuta';
+        } else {
+          heading.textContent = 'Entrar';
+          sub.textContent = 'Acesse sua área para agendar, preencher formulários e acompanhar suas sessões.';
+          badge.textContent = 'Paciente';
+        }
+        // Clear form when switching tabs
+        var em = $('#logEmail'); var pw = $('#logPass');
+        if (em) em.value = ''; if (pw) pw.value = '';
+      };
+    });
+
     var f = $('#formLogin');
-    if (!f) return;
-    f.addEventListener('submit', function(e){
+    if (f) f.addEventListener('submit', function(e){
       e.preventDefault();
+      var errEl = $('#loginError');
+      if (errEl) { errEl.classList.remove('show'); errEl.textContent = ''; }
       try {
         var u = Auth.login($('#logEmail').value.trim(), $('#logPass').value);
-        if (u.role === 'therapist') {
-          /* Terapeuta deve usar a rota secreta */
+        // Verifica se a role bate com a aba selecionada
+        if (loginRole === 'therapist' && u.role !== 'therapist') {
           Auth.logout();
-          toast('Use o acesso restrito','Esta área é apenas para pacientes.','err');
+          if (errEl) { errEl.textContent = 'Estas credenciais não pertencem a uma terapeuta. Se você é paciente, use a aba "Paciente".'; errEl.classList.add('show'); }
+          return;
+        }
+        if (loginRole === 'patient' && u.role !== 'patient') {
+          Auth.logout();
+          if (errEl) { errEl.textContent = 'Estas credenciais não pertencem a um paciente. Se você é terapeuta, use a aba "Terapeuta".'; errEl.classList.add('show'); }
           return;
         }
         toast('Bem-vindo(a)','Olá, ' + u.name.split(' ')[0] + '!','ok');
-        location.hash = '#/paciente';
-      } catch(err){ toast('Não foi possível entrar', err.message, 'err'); }
-    });
-  };
-  return '<section class="auth-wrap"><div class="orb o1" style="opacity:.35"></div><div class="orb o2" style="opacity:.4"></div>' +
-    '<div class="auth-card">' +
-      '<span class="eyebrow">Área do paciente</span>' +
-      '<h2 style="margin-top:16px">Entrar</h2>' +
-      '<p>Acesse sua área para agendar, preencher formulários e acompanhar suas sessões.</p>' +
-      '<form id="formLogin" novalidate>' +
-        '<div class="field"><label for="logEmail">E-mail</label><input type="email" id="logEmail" placeholder="seu@email.com" required autocomplete="email"></div>' +
-        '<div class="field"><label for="logPass">Senha</label><input type="password" id="logPass" placeholder="••••••••" required autocomplete="current-password"></div>' +
-        '<button type="submit" class="btn btn-gold btn-block btn-lg">Entrar ' + ICON.arrow + '</button>' +
-      '</form>' +
-      '<div class="auth-switch">Não tem conta? <a href="#/cadastro">Criar agora</a></div>' +
-    '</div>' +
-  '</section>';
-}
-
-/* ============================================================
-   LOGIN RESTRITO — ACESSO EXCLUSIVO DA TERAPEUTA
-   Rota: #/acesso
-   ============================================================ */
-function viewStaffLogin(){
-  window.__afterRender = function(){
-    var f = $('#staffForm');
-    if (!f) return;
-    f.addEventListener('submit', function(e){
-      e.preventDefault();
-      var errEl = $('#staffError');
-      var email = $('#staffEmail').value.trim();
-      var pass = $('#staffPass').value;
-      try {
-        var u = Auth.login(email, pass);
-        if (u.role !== 'therapist') {
-          /* Se um paciente tentar, logout silencioso e erro genérico */
-          Auth.logout();
-          if (errEl) { errEl.textContent = 'Credenciais inválidas.'; errEl.classList.add('show'); }
-          return;
-        }
-        toast('Acesso autorizado','Bem-vinda, ' + u.name.split(' ')[0] + '.','ok');
-        location.hash = '#/terapeuta';
+        location.hash = u.role === 'therapist' ? '#/terapeuta' : '#/paciente';
       } catch(err){
-        if (errEl) { errEl.textContent = 'Credenciais inválidas.'; errEl.classList.add('show'); }
+        if (errEl) { errEl.textContent = err.message; errEl.classList.add('show'); }
+        else toast('Não foi possível entrar', err.message, 'err');
       }
     });
   };
-  return '<section class="staff-wrap">' +
-    '<div class="staff-card">' +
-      '<div class="staff-icon">' + ICON.lock + '</div>' +
-      '<h2>Acesso Restrito</h2>' +
-      '<p>Espaço exclusivo da terapeuta</p>' +
-      '<form id="staffForm" novalidate>' +
-        '<div class="field"><label for="staffEmail">E-mail</label><input type="email" id="staffEmail" placeholder="••••••••" required autocomplete="off"></div>' +
-        '<div class="field"><label for="staffPass">Chave de acesso</label><input type="password" id="staffPass" placeholder="••••••••" required autocomplete="off"></div>' +
-        '<button type="submit" class="btn btn-wine btn-block" style="margin-top:6px">Entrar</button>' +
-        '<div class="staff-error" id="staffError"></div>' +
+
+  return '<section class="auth-wrap">' +
+    '<div class="orb o1" style="opacity:.35"></div>' +
+    '<div class="orb o2" style="opacity:.4"></div>' +
+    '<div class="auth-card">' +
+      '<span class="eyebrow" id="loginBadge">Paciente</span>' +
+      '<h2 style="margin-top:16px" id="loginHeading">Entrar</h2>' +
+      '<p id="loginSub">Acesse sua área para agendar, preencher formulários e acompanhar suas sessões.</p>' +
+
+      // ABAS
+      '<div class="auth-tabs" role="tablist">' +
+        '<button type="button" class="auth-tab active-tab" data-login-tab="patient" role="tab">' +
+          ICON.user + ' Sou Paciente' +
+        '</button>' +
+        '<button type="button" class="auth-tab" data-login-tab="therapist" role="tab">' +
+          ICON.lock + ' Sou Terapeuta' +
+        '</button>' +
+      '</div>' +
+
+      '<form id="formLogin" novalidate>' +
+        '<div class="field">' +
+          '<label for="logEmail">E-mail</label>' +
+          '<input type="email" id="logEmail" placeholder="seu@email.com" required autocomplete="email">' +
+        '</div>' +
+        '<div class="field">' +
+          '<label for="logPass">Senha</label>' +
+          '<input type="password" id="logPass" placeholder="••••••••" required autocomplete="current-password">' +
+        '</div>' +
+        '<button type="submit" class="btn btn-gold btn-block btn-lg">Entrar ' + ICON.arrow + '</button>' +
+        '<div class="auth-error" id="loginError"></div>' +
       '</form>' +
-      '<div class="staff-foot">Alle Mourad · Acesso Privado</div>' +
+
+      '<div class="auth-switch">Não tem conta? <a href="#/cadastro">Criar agora</a></div>' +
+      '<div class="auth-context-note">' +
+        'Escolha a aba correspondente ao seu perfil. ' +
+        'Credenciais de paciente não acessam o painel da terapeuta — e vice-versa.' +
+      '</div>' +
     '</div>' +
   '</section>';
 }
@@ -1043,7 +1063,7 @@ function viewRegister(){
   return '<section class="auth-wrap"><div class="orb o1" style="opacity:.35"></div><div class="orb o2" style="opacity:.4"></div>' +
     '<div class="auth-card">' +
       '<span class="eyebrow">Nova conta</span>' +
-      '<h2 style="margin-top:16px">Criar conta</h2>' +
+      '<h2 style="margin-top:16px">Criar conta de paciente</h2>' +
       '<p>Leva menos de um minuto. Seus dados ficam protegidos.</p>' +
       '<form id="formRegister" novalidate>' +
         '<div class="field"><label for="regName">Nome completo</label><input type="text" id="regName" placeholder="Como devo te chamar?" required autocomplete="name"></div>' +
@@ -1370,7 +1390,6 @@ function viewTherapistDash(sub){
     '</aside><div>' + content + '</div>' +
   '</div></section>';
 }
-
 function therapistHome(u){
   var all = Appointments.all().filter(function(a){ return a.status !== 'cancelado'; });
   var today = Appointments.byDate(todayISO());
@@ -1401,7 +1420,6 @@ function therapistHome(u){
       }).join('') : '<div class="empty" style="padding:34px 18px">' + ICON.calendar + '<h4>Sem agendamentos futuros</h4></div>') +
     '</div>';
 }
-
 function therapistAgenda(u){
   var view = { year: new Date().getFullYear(), month: new Date().getMonth() };
   window.__afterRender = function(){
@@ -1471,7 +1489,6 @@ function therapistAgenda(u){
   return '<div class="dash-head"><h1>Agenda completa</h1><p>Clique em um dia para ver as sessões e acessar o link do Google Meet.</p></div>' +
     '<div class="cal-wrap"><div class="cal" id="tCal"></div><div class="panel" id="tDayList"></div></div>';
 }
-
 function therapistPatients(u){
   var all = Appointments.all();
   var map = new Map();
@@ -1502,7 +1519,6 @@ function therapistPatients(u){
         '</div></div>';
     }).join('') : '<div class="empty">' + ICON.users + '<h4>Nenhum paciente ainda</h4></div>');
 }
-
 function showPreModal(patientId){
   var pre = PreForms.byPatient(patientId)[0];
   if (!pre) { toast('Sem formulário','Este paciente ainda não preencheu o pré-atendimento.','info'); return; }
@@ -1530,7 +1546,6 @@ function showPreModal(patientId){
   );
 }
 window.showPreModal = showPreModal;
-
 function therapistPre(u){
   var list = PreForms.all().sort(function(a,b){ return b.createdAt - a.createdAt; });
   window.__afterRender = function(){
@@ -1556,12 +1571,10 @@ function therapistPre(u){
       '</div>';
     }).join('') : '<div class="empty">' + ICON.file + '<h4>Nenhum pré-atendimento</h4></div>');
 }
-
 function therapistContent(u){
   window.__afterRender = function(){
     var btn = $('#newPostBtn');
     if (btn) btn.onclick = function(){ openPostModal(null); };
-
     $$('[data-editpost]').forEach(function(b){ b.onclick = function(){
       var post = Posts.byId(b.dataset.editpost);
       if (post) openPostModal(post);
@@ -1582,7 +1595,6 @@ function therapistContent(u){
       '</div>';
     }).join('') : '<div class="empty">' + ICON.edit + '<h4>Nenhum artigo publicado</h4><p>Crie seu primeiro conteúdo clicando em "Novo artigo".</p></div>');
 }
-
 function openPostModal(post){
   var isEdit = !!post;
   var p = post || { title:'', cat:'Ansiedade', read:5, excerpt:'', body:'' };
@@ -1631,7 +1643,6 @@ function openPostModal(post){
     closeModal(); router();
   };
 }
-
 function view404(){
   return '<section class="auth-wrap"><div class="text-center" style="position:relative;z-index:2">' +
     '<div style="font-family:var(--ff-display);font-size:clamp(5rem,16vw,10rem);line-height:1;color:var(--gold);opacity:.35">404</div>' +
@@ -1696,4 +1707,4 @@ setTimeout(function(){ var pl = document.getElementById('preloader'); if (pl) re
 console.log('%cAlle Mourad', 'font-family:cursive;font-size:24px;color:#D4AF37;letter-spacing:2px', '\nAcolher • Compreender • Transformar');
 </script>
 </body>
-         </html>
+    </html>
